@@ -108,6 +108,8 @@ mkdir -p $cache_dir/node
 
 # If app has a node_modules directory, cache it.
 if test -d $build_dir/node_modules; then
+  status "Pruning non production node_modules"
+  npm prune --production 2>&1 | indent
   status "Caching node_modules directory for future builds"
   cp -r $build_dir/node_modules $cache_dir/node
 fi
